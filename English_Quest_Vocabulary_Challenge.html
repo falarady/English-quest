@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>English Quest - Vocabulary Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            background: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+    <script>
+        let questions = [
+            {
+                question: "What is the synonym of 'happy'?",
+                options: ["Sad", "Joyful", "Angry", "Bored"],
+                correct: 1
+            },
+            {
+                question: "What is the opposite of 'weak'?",
+                options: ["Lazy", "Tired", "Strong", "Small"],
+                correct: 2
+            },
+            {
+                question: "Choose the correct spelling:",
+                options: ["Dengerous", "Dangerous", "Dangrous", "Danggerous"],
+                correct: 1
+            }
+        ];
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById("question-text").innerText = questions[currentQuestion].question;
+                let options = document.getElementById("options");
+                options.innerHTML = "";
+                questions[currentQuestion].options.forEach((option, index) => {
+                    let button = document.createElement("button");
+                    button.innerText = option;
+                    button.onclick = () => checkAnswer(index);
+                    options.appendChild(button);
+                });
+            } else {
+                document.getElementById("quiz").innerHTML = `
+                    <h1>Quiz Completed!</h1>
+                    <p>Your score: ${score}/${questions.length}</p>
+                `;
+            }
+        }
+
+        function checkAnswer(selected) {
+            if (selected === questions[currentQuestion].correct) {
+                score++;
+            }
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</head>
+<body>
+    <div class="container" id="quiz">
+        <h1>Vocabulary Challenge</h1>
+        <div class="question" id="question-text"></div>
+        <div class="options" id="options"></div>
+        <div class="result" id="result"></div>
+    </div>
+</body>
+</html>
