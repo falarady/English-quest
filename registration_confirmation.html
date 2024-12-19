@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmation - English Queens</title>
+    <style>
+        body { font-family: 'Comic Sans MS', sans-serif; background-color: #FFF0F5; margin: 0; padding: 0; }
+        .header { background-color: #FF69B4; padding: 20px; text-align: center; font-size: 24px; color: white; }
+        .container { max-width: 600px; margin: 30px auto; background: #FFE4E1; padding: 20px; border-radius: 10px; text-align: center; }
+        .team-details { font-size: 18px; color: #333; margin-bottom: 20px; }
+        button { padding: 10px; margin: 10px; background-color: #FF69B4; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #FF1493; }
+        footer { background-color: #FF69B4; padding: 10px; text-align: center; color: white; position: absolute; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="header">👑 Registration Confirmation 👑</div>
+    <div class="container">
+        <h2>Team Registered Successfully!</h2>
+        <div class="team-details" id="team-details">
+            <!-- Team details will be dynamically added here -->
+        </div>
+        <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+    <footer>👑 Created by Alanoud Alsubaie | English Queens Challenge © 2024 👑</footer>
+    <script>
+        const teamName = JSON.parse(localStorage.getItem("currentTeam"));
+        const teamDetails = document.getElementById("team-details");
+
+        if (teamName) {
+            teamDetails.innerHTML = `<strong>Team Name:</strong> ${teamName}<br><strong>Players:</strong> 3 players registered`;
+        } else {
+            teamDetails.innerHTML = "No team registered. Please go back and register a team.";
+        }
+
+        function startQuiz() {
+            window.location.href = "quiz.html";
+        }
+    </script>
+</body>
+</html>
