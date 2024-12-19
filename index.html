@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Queens - Team Registration</title>
+    <style>
+        body { font-family: 'Comic Sans MS', sans-serif; background-color: #FFF0F5; margin: 0; padding: 0; }
+        .header { background-color: #FF69B4; padding: 20px; text-align: center; font-size: 24px; color: white; }
+        .container { max-width: 700px; margin: 30px auto; background: #FFE4E1; padding: 20px; border-radius: 10px; text-align: center; }
+        input, button { padding: 10px; margin: 10px 0; width: 80%; border-radius: 10px; border: 2px solid #FFB6C1; }
+        button { background-color: #FF69B4; color: white; font-size: 16px; cursor: pointer; }
+        button:hover { background-color: #FF1493; }
+        footer { background-color: #FF69B4; padding: 10px; text-align: center; color: white; position: absolute; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="header">👑 Welcome to English Queens 👑</div>
+    <div class="container">
+        <h2>Register Your Team</h2>
+        <form id="teamForm">
+            <input type="text" placeholder="Team Name" id="teamName" required><br>
+            <input type="text" placeholder="Player 1" id="player1" required><br>
+            <input type="text" placeholder="Player 2" id="player2" required><br>
+            <input type="text" placeholder="Player 3" id="player3" required><br>
+            <button type="button" onclick="registerTeam()">Register</button>
+        </form>
+    </div>
+    <footer>👑 Created by Alanoud Alsubaie | English Queens Challenge © 2024 👑</footer>
+    <script>
+        function registerTeam() {
+            const teamName = document.getElementById("teamName").value;
+            const player1 = document.getElementById("player1").value;
+            const player2 = document.getElementById("player2").value;
+            const player3 = document.getElementById("player3").value;
+            localStorage.setItem("currentTeam", JSON.stringify(teamName));
+            window.location.href = "quiz.html";
+        }
+    </script>
+</body>
+</html>
