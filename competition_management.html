@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Management - English Queens</title>
+    <style>
+        body { font-family: 'Comic Sans MS', sans-serif; background-color: #FFF0F5; margin: 0; padding: 0; }
+        .header { background-color: #FF69B4; padding: 20px; text-align: center; font-size: 24px; color: white; }
+        .container { max-width: 700px; margin: 30px auto; background: #FFE4E1; padding: 20px; border-radius: 10px; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #FFB6C1; padding: 10px; text-align: center; }
+        th { background-color: #FF69B4; color: white; }
+        td { background-color: #FFF0F5; }
+        footer { background-color: #FF69B4; padding: 10px; text-align: center; color: white; position: absolute; bottom: 0; width: 100%; }
+        button { margin-top: 20px; padding: 10px 20px; background-color: #FF69B4; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #FF1493; }
+    </style>
+</head>
+<body>
+    <div class="header">👑 Competition Management 👑</div>
+    <div class="container">
+        <h2>Saved Competitions</h2>
+        <table id="competitions-table">
+            <thead>
+                <tr>
+                    <th>Competition ID</th>
+                    <th>Date</th>
+                    <th>Winner</th>
+                    <th>View Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Competitions will be dynamically added here -->
+            </tbody>
+        </table>
+        <button onclick="startNewCompetition()">Start New Competition</button>
+    </div>
+    <footer>👑 Created by Alanoud Alsubaie | English Queens Challenge © 2024 👑</footer>
+    <script>
+        const competitions = JSON.parse(localStorage.getItem("competitions")) || [];
+
+        function loadCompetitions() {
+            const tableBody = document.getElementById("competitions-table").querySelector("tbody");
+            tableBody.innerHTML = "";
+
+            competitions.forEach((competition, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${competition.date}</td>
+                    <td>${competition.winner}</td>
+                    <td><button onclick="viewDetails(${index})">View</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function startNewCompetition() {
+            if (confirm("Are you sure you want to start a new competition?")) {
+                localStorage.removeItem("teams");
+                window.location.href = "index.html";
+            }
+        }
+
+        function viewDetails(index) {
+            const competition = competitions[index];
+            alert(`Competition Date: ${competition.date}\nWinner: ${competition.winner}\nTeams: ${competition.teams.map(t => t.name + " (" + t.score + ")").join(", ")}`);
+        }
+
+        // Initialize
+        loadCompetitions();
+    </script>
+</body>
+</html>
