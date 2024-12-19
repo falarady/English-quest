@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - English Queens</title>
+    <style>
+        body { font-family: 'Comic Sans MS', sans-serif; background-color: #FFF0F5; margin: 0; padding: 0; }
+        .header { background-color: #FF69B4; padding: 20px; text-align: center; font-size: 24px; color: white; }
+        .container { max-width: 700px; margin: 30px auto; background: #FFE4E1; padding: 20px; border-radius: 10px; text-align: center; }
+        .question { font-size: 18px; margin-bottom: 20px; }
+        .answers { display: flex; flex-direction: column; align-items: center; }
+        button { padding: 10px; margin: 10px; background-color: #FF69B4; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; width: 80%; }
+        button:hover { background-color: #FF1493; }
+        footer { background-color: #FF69B4; padding: 10px; text-align: center; color: white; position: absolute; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="header">👑 English Queens Quiz 👑</div>
+    <div class="container">
+        <div id="quiz-content">
+            <!-- Dynamic questions will be added here -->
+        </div>
+    </div>
+    <footer>👑 Created by Alanoud Alsubaie | English Queens Challenge © 2024 👑</footer>
+    <script>
+        const questions = [
+            {
+                type: "reading",
+                text: "Samantha loves books. She visits the library every week. One day, she couldn’t find her favorite book. She asked the librarian for help.",
+                question: "Why did Samantha ask the librarian?",
+                options: ["She wanted a new book.", "She couldn’t find her book.", "She wanted to leave."],
+                answer: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const quizContent = document.getElementById("quiz-content");
+            quizContent.innerHTML = "";
+
+            const question = questions[currentQuestion];
+
+            if (question.type === "reading") {
+                const text = document.createElement("p");
+                text.textContent = question.text;
+                text.style.fontWeight = "bold";
+                quizContent.appendChild(text);
+            }
+
+            const questionText = document.createElement("p");
+            questionText.textContent = question.question;
+            questionText.className = "question";
+            quizContent.appendChild(questionText);
+
+            const answers = document.createElement("div");
+            answers.className = "answers";
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index);
+                answers.appendChild(button);
+            });
+
+            quizContent.appendChild(answers);
+        }
+
+        function checkAnswer(selected) {
+            const question = questions[currentQuestion];
+            if (selected === question.answer) {
+                score += 10;
+            }
+
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const quizContent = document.getElementById("quiz-content");
+            quizContent.innerHTML = `<h2>Quiz Completed!</h2><p>Your score: ${score}/${questions.length * 10}</p>`;
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

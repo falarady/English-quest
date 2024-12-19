@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - English Queens</title>
+    <style>
+        body { font-family: 'Comic Sans MS', sans-serif; background-color: #FFF0F5; margin: 0; padding: 0; }
+        .header { background-color: #FF69B4; padding: 20px; text-align: center; font-size: 24px; color: white; }
+        .container { max-width: 600px; margin: 30px auto; background: #FFE4E1; padding: 20px; border-radius: 10px; text-align: center; }
+        .winner { font-size: 24px; color: #FF1493; margin-bottom: 20px; }
+        .details { font-size: 18px; color: #333; }
+        button { padding: 10px; margin: 10px; background-color: #FF69B4; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #FF1493; }
+        footer { background-color: #FF69B4; padding: 10px; text-align: center; color: white; position: absolute; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="header">👑 English Queens Results 👑</div>
+    <div class="container">
+        <div class="winner" id="winner">🏆 Team A Wins! 🏆</div>
+        <div class="details" id="details">
+            Final Scores:<br>
+            1. Team A: 100 points<br>
+            2. Team B: 90 points<br>
+            3. Team C: 80 points<br>
+        </div>
+        <button onclick="startNewCompetition()">Start New Competition</button>
+    </div>
+    <footer>👑 Created by Alanoud Alsubaie | English Queens Challenge © 2024 👑</footer>
+    <script>
+        const teams = [
+            { name: "Team A", score: 100 },
+            { name: "Team B", score: 90 },
+            { name: "Team C", score: 80 }
+        ];
+
+        function displayResults() {
+            const winner = teams.sort((a, b) => b.score - a.score)[0];
+            document.getElementById("winner").textContent = `🏆 ${winner.name} Wins! 🏆`;
+
+            const details = teams.map((team, index) => `${index + 1}. ${team.name}: ${team.score} points`).join("<br>");
+            document.getElementById("details").innerHTML = `Final Scores:<br>${details}`;
+        }
+
+        function startNewCompetition() {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+
+        displayResults();
+    </script>
+</body>
+</html>
